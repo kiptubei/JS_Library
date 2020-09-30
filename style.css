@@ -1,7 +1,6 @@
 body {
     color: #616161;
     background-color: black;
-    text-align: center;
     justify-content: center;
 }
 
@@ -22,3 +21,12 @@ td {
     background-color: #616161;
     border-radius: 10px;
 }
+button {
+    background-color: #8ebf42;
+    color: white;
+    padding: 14px 0;
+    margin: 10px 0;
+    border: none;
+    width: 10%;
+    border-radius: 5px;
+    }
