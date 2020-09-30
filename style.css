@@ -1,0 +1,24 @@
+body {
+    color: #616161;
+    background-color: black;
+    text-align: center;
+    justify-content: center;
+}
+
+#library-grid {
+    margin: 5% 10%;
+}
+
+tr {
+    padding: 10px 0;
+}
+
+td {
+    padding: 50px;
+}
+
+.head {
+    color: chartreuse;
+    background-color: #616161;
+    border-radius: 10px;
+}

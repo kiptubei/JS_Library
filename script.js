@@ -14,3 +14,15 @@ function addBookToLibrary() {
 
 addBookToLibrary();
 console.log(myLibrary);
+
+let table = document.getElementById('di-library');
+myLibrary.forEach(library => {
+    let tr = document.createElement('tr');
+    const values = Object.values(library);
+    values.forEach(value => {
+       let td = document.createElement('td');
+       td.innerHTML= value;
+       tr.appendChild(td);
+    });
+    table.appendChild(tr);
+});
