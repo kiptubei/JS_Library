@@ -10,19 +10,16 @@ function Book(author, title, pages, read) {
 function addBookToLibrary(myBook) {
   myLibrary.push(myBook);
   let table = document.getElementById("di-library");
-
-  for (let count = myLibrary.length - 1; count < myLibrary.length; count++) {
-    let library = myLibrary[count];
-    let tr = document.createElement("tr");
-    console.log(myLibrary.length);
-    let values = Object.values(library);
-    values.forEach((value) => {
-      let td = document.createElement("td");
-      td.innerHTML = value;
-      tr.appendChild(td);
-    });
-    table.appendChild(tr);
-  }
+  let library = myLibrary[myLibrary.length - 1];
+  let tr = document.createElement("tr");
+  console.log(myLibrary.length);
+  let values = Object.values(library);
+  values.forEach((value) => {
+    let td = document.createElement("td");
+    td.innerHTML = value;
+    tr.appendChild(td);
+  });
+  table.appendChild(tr);
 }
 
 let form = document.querySelector(".form");
