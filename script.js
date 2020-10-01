@@ -19,6 +19,15 @@ function addBookToLibrary(myBook) {
     td.innerHTML = value;
     tr.appendChild(td);
   });
+  let del = document.createElement("button");
+  del.innerHTML = "Remove";
+  del.setAttribute('class','delete');
+  del.setAttribute('id', myLibrary.length - 1);
+  del.onclick = function () {
+    table.removeChild(tr);
+  };
+
+  tr.appendChild(del);
   table.appendChild(tr);
 }
 
