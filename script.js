@@ -1,7 +1,21 @@
-let myLibrary = [];
+var myLibrary = [];
+
+function Book(author, title, pages, read) {
+  this.author = author;
+  this.title = title;
+  this.pages = pages;
+  this.read = read;
+}
+
+function addBookToLibrary(myBook) {
+  myLibrary.push(myBook);
+  window.localStorage.setItem('library', JSON.stringify(myLibrary));
+  console.log(myLibrary);
 
   let table = document.getElementById('di-library');
-
+  console.log(table);
+  
+  myLibrary=window.localStorage.getItem('library');
   myLibrary.forEach(library => {
       let tr = document.createElement('tr');
       console.log(myLibrary.length);
@@ -13,17 +27,7 @@ let myLibrary = [];
       });
       table.appendChild(tr);
   });
-
-function Book(author, title, pages, read) {
-  this.author = author;
-  this.title = title;
-  this.pages = pages;
-  this.read = read;
-}
-
-function addBookToLibrary(myBook) {
-  myLibrary.push(myBook);
-  console.log(myLibrary);
+  
 }
 
 let form = document.querySelector('.form');
