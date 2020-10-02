@@ -1,4 +1,4 @@
-var myLibrary = [];
+let myLibrary = [];
 
 function Book(author, title, pages, read) {
   this.author = author;
@@ -7,14 +7,11 @@ function Book(author, title, pages, read) {
   this.read = read;
 }
 
-//localStorage.removeItem('library');
-
 if (localStorage.getItem("library") !== null) {
   myLibrary = JSON.parse(localStorage.getItem("library"));
   console.log(myLibrary);
 
   let table = document.getElementById("di-library");
-  //let library = myLibrary[myLibrary.length - 1];
 
   myLibrary.forEach((library) => {
     let tr = document.createElement("tr");
@@ -60,13 +57,15 @@ if (localStorage.getItem("library") !== null) {
     let del = document.createElement("button");
     del.innerHTML = "Remove";
     del.setAttribute("class", "delete");
-    del.setAttribute("id", myLibrary.length - 1);
+    del.setAttribute("id", library.title);
     del.onclick = function () {
       table.removeChild(tr);
 
-      //myLibrary.splice(index, 1);
+      myLibrary = $.grep(myLibrary, function (e) {
+        return e.title != library.title;
+      });
 
-      //localStorage.setItem('library',JSON.stringify(myLibrary));
+      localStorage.setItem("library", JSON.stringify(myLibrary));
     };
 
     tr.appendChild(del);
@@ -115,8 +114,6 @@ function addBookToLibrary(myBook) {
   del.setAttribute("id", myLibrary.length - 1);
   del.onclick = function () {
     table.removeChild(tr);
-    // myLibrary.splice(index, 1);
-    // localStorage.setItem('library',JSON.stringify(myLibrary));
   };
 
   tr.appendChild(del);
@@ -147,15 +144,15 @@ function empty() {
 
 function reloadPage() {
   // The last "domLoading" Time //
-  var currentDocumentTimestamp = new Date(
+  let currentDocumentTimestamp = new Date(
     performance.timing.domLoading
   ).getTime();
   // Current Time //
-  var now = Date.now();
+  let now = Date.now();
   // Ten Seconds //
-  var tenSec = 10 * 1000;
+  let tenSec = 10 * 1000;
   // Plus Ten Seconds //
-  var plusTenSec = currentDocumentTimestamp + tenSec;
+  let plusTenSec = currentDocumentTimestamp + tenSec;
   if (now > plusTenSec) {
     location.reload();
   } else {
