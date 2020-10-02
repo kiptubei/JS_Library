@@ -7,6 +7,9 @@ function Book(author, title, pages, read) {
   this.read = read;
 }
 
+
+function render(){
+
 if (localStorage.getItem('library') !== null) {
   myLibrary = JSON.parse(localStorage.getItem('library'));
 
@@ -66,6 +69,9 @@ if (localStorage.getItem('library') !== null) {
     localStorage.setItem('library', JSON.stringify(myLibrary));
   });
 }
+}
+
+render();
 
 function addBookToLibrary(myBook) {
   myLibrary.push(myBook);
