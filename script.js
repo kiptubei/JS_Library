@@ -6,11 +6,13 @@ function Book(author, title, pages, read) {
   this.pages = pages;
   this.read = read;
 }
-//capital != null
-if (localStorage.token !== null){
-  console.log(myLibrary);
+//localStorage.removeItem('library');
+
+if (localStorage.getItem("library") !== null){
+  
   myLibrary = JSON.parse(localStorage.getItem('library'));
   console.log(myLibrary);
+
   let table = document.getElementById("di-library");
   //let library = myLibrary[myLibrary.length - 1];
 
@@ -32,12 +34,16 @@ if (localStorage.token !== null){
           status.setAttribute('checked', 'checked');
         }
 
-        status.setAttribute('id', myLibrary.length - 1);
+        status.setAttribute('id', myLibrary.length-1);
         status.onclick = function () {
           if (value === true){
-            value === false;
+            value = false;
+            library.read=false;
+            console.log(library.read);
           }else{
-            value === true;
+            value = true;
+            library.read=true;
+            console.log(library.read);
           }
         };
         tr.appendChild(status);
@@ -48,24 +54,28 @@ if (localStorage.token !== null){
     let del = document.createElement("button");
     del.innerHTML = "Remove";
     del.setAttribute('class','delete');
-    del.setAttribute('id', myLibrary.length - 1);
+    del.setAttribute('id', myLibrary.length-1);
     del.onclick = function () {
       table.removeChild(tr);
+      
+      //myLibrary.splice(index, 1);
+
+      //localStorage.setItem('library',JSON.stringify(myLibrary));
     };
 
     tr.appendChild(del);
     table.appendChild(tr);
-
+    localStorage.setItem('library',JSON.stringify(myLibrary));
   });
 
 }
 
 function addBookToLibrary(myBook) {
   myLibrary.push(myBook);
+  let ID = myLibrary.length - 1;
   let table = document.getElementById("di-library");
   let library = myLibrary[myLibrary.length - 1];
   let tr = document.createElement("tr");
-  console.log(myLibrary.length);
 
   let values = Object.values(library);
   values.forEach((value) => {
@@ -82,12 +92,12 @@ function addBookToLibrary(myBook) {
         status.setAttribute('checked', 'checked');
       }
 
-      status.setAttribute('id', myLibrary.length - 1);
+      status.setAttribute('id', myLibrary.length-1);
       status.onclick = function () {
         if (value === true){
-          value === false;
+          value = false;
         }else{
-          value === true;
+          value = true;
         }
       };
       tr.appendChild(status);
@@ -102,6 +112,8 @@ function addBookToLibrary(myBook) {
   del.setAttribute('id', myLibrary.length - 1);
   del.onclick = function () {
     table.removeChild(tr);
+    // myLibrary.splice(index, 1);
+    // localStorage.setItem('library',JSON.stringify(myLibrary));
   };
 
   tr.appendChild(del);
