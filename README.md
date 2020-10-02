@@ -9,8 +9,8 @@ Small library that display the book that I have read or intend to read soon
 3. “NEW BOOK” button that brings up a form allowing users to input the details for the new book: author, title, number of pages, whether it’s been read and anything else you might want.
 4. Button on each book’s display to remove the book from the library.
 5. Button on each book’s display to change its read status.
-6. Right-side section with _Profile detailed info._
-7. Used localstorage to store book data
+6. Used localstorage to store book data
+
 
 ## Built With
 
