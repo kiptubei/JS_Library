@@ -6,11 +6,11 @@ function Book(author, title, pages, read) {
   this.pages = pages;
   this.read = read;
 }
+
 //localStorage.removeItem('library');
 
-if (localStorage.getItem("library") !== null){
-  
-  myLibrary = JSON.parse(localStorage.getItem('library'));
+if (localStorage.getItem("library") !== null) {
+  myLibrary = JSON.parse(localStorage.getItem("library"));
   console.log(myLibrary);
 
   let table = document.getElementById("di-library");
@@ -25,39 +25,45 @@ if (localStorage.getItem("library") !== null){
       td.innerHTML = value;
       tr.appendChild(td);
 
-      if(value === true || value === false){
+      if (value === true || value === false) {
         let status = document.createElement("input");
-        status.setAttribute('type', 'checkbox'); 
-        status.setAttribute('name', "status");
+        status.setAttribute("type", "checkbox");
+        status.setAttribute("name", "status");
 
-        if (value === true){
-          status.setAttribute('checked', 'checked');
+        if (value === true) {
+          status.setAttribute("checked", "checked");
+        } else {
+          status.removeAttribute("checked");
         }
 
-        status.setAttribute('id', myLibrary.length-1);
-        status.onclick = function () {
-          if (value === true){
+        status.setAttribute("id", myLibrary.length - 1);
+
+        status.addEventListener("CheckboxStateChange", function (e) {
+          console.log(library.read);
+
+          if (library.read === true) {
             value = false;
-            library.read=false;
+            library.read = false;
             console.log(library.read);
-          }else{
+          } else {
             value = true;
-            library.read=true;
+            library.read = true;
             console.log(library.read);
           }
-        };
+          td.innerHTML = value;
+        });
+
         tr.appendChild(status);
       }
-
     });
 
     let del = document.createElement("button");
     del.innerHTML = "Remove";
-    del.setAttribute('class','delete');
-    del.setAttribute('id', myLibrary.length-1);
+    del.setAttribute("class", "delete");
+    del.setAttribute("id", myLibrary.length - 1);
     del.onclick = function () {
       table.removeChild(tr);
-      
+
       //myLibrary.splice(index, 1);
 
       //localStorage.setItem('library',JSON.stringify(myLibrary));
@@ -65,9 +71,8 @@ if (localStorage.getItem("library") !== null){
 
     tr.appendChild(del);
     table.appendChild(tr);
-    localStorage.setItem('library',JSON.stringify(myLibrary));
+    localStorage.setItem("library", JSON.stringify(myLibrary));
   });
-
 }
 
 function addBookToLibrary(myBook) {
@@ -83,33 +88,31 @@ function addBookToLibrary(myBook) {
     td.innerHTML = value;
     tr.appendChild(td);
 
-    if(value === true || value === false){
+    if (value === true || value === false) {
       let status = document.createElement("input");
-      status.setAttribute('type', 'checkbox'); 
-      status.setAttribute('name', "status");
+      status.setAttribute("type", "checkbox");
+      status.setAttribute("name", "status");
 
-      if (value === true){
-        status.setAttribute('checked', 'checked');
+      if (value === true) {
+        status.setAttribute("checked", "checked");
       }
 
-      status.setAttribute('id', myLibrary.length-1);
+      status.setAttribute("id", myLibrary.length - 1);
       status.onclick = function () {
-        if (value === true){
+        if (value === true) {
           value = false;
-        }else{
+        } else {
           value = true;
         }
       };
       tr.appendChild(status);
     }
-
   });
-
 
   let del = document.createElement("button");
   del.innerHTML = "Remove";
-  del.setAttribute('class','delete');
-  del.setAttribute('id', myLibrary.length - 1);
+  del.setAttribute("class", "delete");
+  del.setAttribute("id", myLibrary.length - 1);
   del.onclick = function () {
     table.removeChild(tr);
     // myLibrary.splice(index, 1);
@@ -119,7 +122,8 @@ function addBookToLibrary(myBook) {
   tr.appendChild(del);
   table.appendChild(tr);
 
-  localStorage.setItem('library', JSON.stringify(myLibrary));
+  localStorage.setItem("library", JSON.stringify(myLibrary));
+  reloadPage();
 }
 
 let form = document.querySelector(".form");
@@ -135,8 +139,25 @@ form.addEventListener("submit", (e) => {
 });
 
 function empty() {
-  document.querySelector("#author").value = '';
-  document.querySelector("#title").value = '';
-  document.querySelector("#pages").value = '';
+  document.querySelector("#author").value = "";
+  document.querySelector("#title").value = "";
+  document.querySelector("#pages").value = "";
   document.querySelector("#read").checked = false;
+}
+
+function reloadPage() {
+  // The last "domLoading" Time //
+  var currentDocumentTimestamp = new Date(
+    performance.timing.domLoading
+  ).getTime();
+  // Current Time //
+  var now = Date.now();
+  // Ten Seconds //
+  var tenSec = 10 * 1000;
+  // Plus Ten Seconds //
+  var plusTenSec = currentDocumentTimestamp + tenSec;
+  if (now > plusTenSec) {
+    location.reload();
+  } else {
+  }
 }
